@@ -2,8 +2,10 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}Hypnos - Groupe d'hôtel 5 étoiles{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        <script src="https://kit.fontawesome.com/e98cd34f75.js" crossorigin="anonymous"></script>
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
@@ -12,7 +14,68 @@
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
-    <body>
+    <body class="bg-dark archane">
+    <header class="container">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <img src="{{ asset('img/logo_blanc.png') }}" alt="logo" height="80">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav m-auto mb-2 mb-lg-0 fs-5">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Accueil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Nos Hôtels</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Réservation</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Nous contacter</a>
+                        </li>
+                    </ul>
+                    <div class="dropdown">
+                        <button class="btn btn-info dropdown-toggle text-dark d-flex align-items-center" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-circle-user me-2"></i> Se connecter
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item" href="#">Se connecter</a></li>
+                            <li><a class="dropdown-item" href="#">S'inscrire</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Aide</a></li>
+                            <li><a class="dropdown-item" href="#">Conditions générales de services</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </nav>
+    </header>
         {% block content %}{% endblock %}
+    <footer class="py-3 my-4 container">
+        <div class="d-flex flex-column justify-content-center flex-lg-row justify-content-lg-between mb-4">
+            <div class="d-flex justify-content-center">
+                <img src="{{ asset('img/logo_blanc2.png') }}" alt="logo" width="100">
+            </div>
+            <div class="d-flex justify-content-center align-items-center mt-4 mt-lg-0">
+                <a href="#"><i class="fa-brands fa-facebook text-white fa-2xl me-3"></i></a>
+                <a href="#"><i class="fa-brands fa-instagram text-white fa-2xl me-3"></i></a>
+                <a href="#"><i class="fa-brands fa-linkedin text-white fa-2xl me-3"></i></a>
+            </div>
+        </div>
+        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Mentions légales</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-white">CGS</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Cookies</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Gérer mes réservations</a></li>
+        </ul>
+
+        <p class="text-center text-white">© {{ "now" | date('Y')}} Hypnos, Développé par Flavien Groslevin</p>
+    </footer>
     </body>
 </html>
