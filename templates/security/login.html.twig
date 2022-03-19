@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Se connecter | Groupe Hypnos{% endblock %}
+
+{% block content %}
+    <div class="container col-xl-5 mt-4" style="height: calc(100vh - 324px)">
+        <form class="d-flex flex-column h-100 justify-content-center" id="formlogin" method="post">
+            <h1 class="h3 mb-4 font-weight-normal text-center">Merci de vous connecter</h1>
+            {% if error %}
+                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+            <div class="input-group mb-4">
+                <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-user"></i></span>
+                <input type="text" name="email" value="{{ last_username }}" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1" autocomplete="email" required autofocus>
+            </div>
+            <div class="input-group mb-4">
+                <span class="input-group-text" id="basic-addon2"><i class="fa-solid fa-key"></i></span>
+                <input type="password" name="password" value="{{ last_username }}" class="form-control" placeholder="Mot de passe" aria-label="Mot de passe" aria-describedby="basic-addon2" autocomplete="current-password" required>
+            </div>
+            <input type="hidden" name="_csrf_token"
+                   value="{{ csrf_token('authenticate') }}"
+            >
+            <button class="btn btn-lg btn-info w-100 mt-3" type="submit">
+                Se connecter
+            </button>
+        </form>
+    </div>
+{% endblock %}

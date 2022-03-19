@@ -18,7 +18,7 @@
     <header class="container">
         <nav class="navbar navbar-expand-lg navbar-dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="{{ path('app_home') }}">
                     <img src="{{ asset('img/logo_blanc.png') }}" alt="logo" height="80">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,7 +27,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav m-auto mb-2 mb-lg-0 fs-5">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Accueil</a>
+                            <a class="nav-link active" aria-current="page" href="{{ path('app_home') }}">Accueil</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Nos Hôtels</a>
@@ -40,12 +40,24 @@
                         </li>
                     </ul>
                     <div class="dropdown">
-                        <button class="btn btn-info dropdown-toggle text-dark d-flex align-items-center" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa-solid fa-circle-user me-2"></i> Se connecter
-                        </button>
+                        {% if app.user %}
+                            <button class="btn btn-info dropdown-toggle text-dark d-flex align-items-center" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                               Bonjour {{ app.user.firstname }} ! <i class="fa-solid fa-user-check ms-2"></i>
+                            </button>
+                        {% else %}
+                            <button class="btn btn-info dropdown-toggle text-dark d-flex align-items-center" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                 <i class="fa-solid fa-circle-user me-2"></i> Se connecter
+                            </button>
+                        {% endif %}
                         <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item" href="#">Se connecter</a></li>
-                            <li><a class="dropdown-item" href="#">S'inscrire</a></li>
+                            {% if app.user %}
+                                <li><a class="dropdown-item" href="#">Gérer mes réservations</a></li>
+                                <li><a class="dropdown-item" href="#">Modifiers mes informations personnelles</a></li>
+                                <li><a class="dropdown-item" href="{{ path('app_logout') }}">Se déconnecter</a></li>
+                            {% else %}
+                                <li><a class="dropdown-item" href="{{ path('app_login') }}">Se connecter</a></li>
+                                <li><a class="dropdown-item" href="{{ path('app_register') }}">S'inscrire</a></li>
+                            {% endif %}
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="#">Aide</a></li>
                             <li><a class="dropdown-item" href="#">Conditions générales de services</a></li>
@@ -58,6 +70,16 @@
     </header>
         {% block content %}{% endblock %}
     <footer class="py-3 my-4 container">
+    {% if (app.request.get('_route') == 'app_login' or app.request.get('_route') == 'app_register')  %}
+        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Mentions légales</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-white">CGS</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Cookies</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Gérer mes réservations</a></li>
+        </ul>
+        <p class="text-center text-white">© {{ "now" | date('Y')}} Hypnos, Développé par Flavien Groslevin</p>
+    </footer>
+    {% else %}
         <div class="d-flex flex-column justify-content-center flex-lg-row justify-content-lg-between mb-4">
             <div class="d-flex justify-content-center">
                 <img src="{{ asset('img/logo_blanc2.png') }}" alt="logo" width="100">
@@ -74,8 +96,8 @@
             <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Cookies</a></li>
             <li class="nav-item"><a href="#" class="nav-link px-2 text-white">Gérer mes réservations</a></li>
         </ul>
-
         <p class="text-center text-white">© {{ "now" | date('Y')}} Hypnos, Développé par Flavien Groslevin</p>
     </footer>
+    {% endif %}
     </body>
 </html>
