@@ -1,5 +1,92 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
-
+    <main>
+        <article class="container mt-3">
+            <section class="background-home">
+                <div class="d-flex h-75 flex-column justify-content-end text-center align-items-center">
+                    <h1 class="title-background">Laissez vous guider par votre curiosité !</h1>
+                    <button class="btn btn-info">Réserser maintenant</button>
+                </div>
+            </section>
+            <section class="row mt-5">
+                <div class="col-lg-6">
+                    <img class="rounded-3 img-fluid" src="{{ asset('./img/Homepage/img_section2.webp') }}" alt="Hypnos hôtels">
+                </div>
+                <div class="col-lg-6 d-flex flex-column justify-content-center mt-3 mt-lg-0">
+                    <span>HYPNOS HÔTELS</span>
+                    <h2 class="title text-success">Exigez le meilleur</h2>
+                    <p style="text-align: justify">Créée en 2000, Hypnos Hotels est une chaîne d'hôtels de luxe qui vous accueille dans le respect des meilleures traditions de l'hôtellerie française. Nous redéfinissons le luxe, pour donner un nouveau sens au concept de vacances et vous offrir une expérience unique. Nous faisons en sorte que chaque client se sente unique, grâce à une attention portée aux moindres détails, tout en proposant l'opportunité d'une nouvelle expérience de vacances. Des bains et spas richement décorés aux soirées de divertissement passionnantes, en passant par une variété de sports, des repas d'exception et des clubs enfants animés : le luxe est toujours au rendez-vous.</p>
+                </div>
+            </section>
+            <section class="text-center mt-5">
+                <h3 class="title">Nos Hôtels</h3>
+                <hr class="w-25 m-auto my-2 text-success">
+                <span class="text-uppercase">Établissement 5 étoiles dans tout l'exagones</span>
+                <div class="row mt-4">
+                    <div class="col-md-8 mt-4">
+                        <img class="rounded-3 img-fluid" src="{{ asset('./img/Homepage/luxury-hotel1.webp') }}" alt="hôtel Hypnos Cannes">
+                    </div>
+                    <div class="col-md-4 mt-4">
+                        <img class="rounded-3 img-fluid" src="{{ asset('./img/Homepage/luxury-hotel3.webp') }}" alt="Espace spa">
+                    </div>
+                    <div class="col-md-8 mt-4">
+                        <img class="rounded-3 img-fluid" src="{{ asset('./img/Homepage/luxury-hotel2.webp') }}" alt="Salle de restauration">
+                    </div>
+                    <div class="col-md-4 mt-4 d-flex flex-column justify-content-center">
+                        <div class="border border-success p-4">
+                            <h3 class="title text-center text-success text-decoration-underline">Soyez les bienvenus</h3>
+                            <p style="text-align: center">L’équipe Hypnos vous accueille dans une ambiance luxueuse et familiale dans l'une de ses 90 chambres et suites.</p>
+                            <button href="#" class="btn btn-info">Réserver une suite</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="text-center mt-5">
+                <h3 class="title">Nos Services Premium</h3>
+                <hr class="w-25 m-auto my-2 text-success">
+                <span class="text-uppercase">Détendez vous pendant votre séjour</span>
+                <div class="row">
+                    <div class="col-4 col-md-3 mt-4 d-flex flex-column">
+                        <i class="fa-solid fa-person-swimming fa-4x"></i>
+                        <span class="fs-5">Piscine</span>
+                    </div>
+                    <div class="col-4 col-md-3 mt-4 d-flex flex-column">
+                        <i class="fa-solid fa-spa fa-4x"></i>
+                        <span class="fs-5">Espace détente</span>
+                    </div>
+                    <div class="col-4 col-md-3 mt-4 d-flex flex-column">
+                        <i class="fa-solid fa-dumbbell fa-4x"></i>
+                        <span class="fs-5">Salle de sport</span>
+                    </div>
+                    <div class="col-4 col-md-3 mt-4 d-flex flex-column">
+                        <i class="fa-solid fa-mug-saucer fa-4x"></i>
+                        <span class="fs-5">Petit-déjeuner</span>
+                    </div>
+                    <div class="col-4 col-md-3 mt-4 d-flex flex-column">
+                        <i class="fa-solid fa-martini-glass fa-4x"></i>
+                        <span class="fs-5">Bar</span>
+                    </div>
+                    <div class="col-4 col-md-3 mt-4 d-flex flex-column">
+                        <i class="fa-solid fa-water-ladder fa-4x"></i>
+                        <span class="fs-5">Spa privatif</span>
+                    </div>
+                    <div class="col-4 col-md-3 mt-4 d-flex flex-column">
+                        <i class="fa-solid fa-utensils fa-4x"></i>
+                        <span class="fs-5">Restaurant gastronomique</span>
+                    </div>
+                    <div class="col-4 col-md-3 mt-4 d-flex flex-column">
+                        <i class="fa-solid fa-cart-flatbed-suitcase fa-4x"></i>
+                        <span class="fs-5">Porte bagage</span>
+                    </div>
+                </div>
+            </section>
+            <section class="background-end mt-4">
+                <div class="d-flex h-75 flex-column justify-content-end text-center align-items-center">
+                    <h1 class="title-background">Vivez un séjour unique !</h1>
+                    <button class="btn btn-info">Réserser maintenant</button>
+                </div>
+            </section>
+        </article>
+    </main>
 {% endblock %}

@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="description" content="Le groupe Hypnos est un groupe hôtelier créé en 2000, il est réputé aujourd'hui dans toute la France pour son service premium et son prestige">
         <title>{% block title %}Hypnos - Groupe d'hôtel 5 étoiles{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         <script src="https://kit.fontawesome.com/e98cd34f75.js" crossorigin="anonymous"></script>
@@ -27,7 +29,11 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav m-auto mb-2 mb-lg-0 fs-5">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{{ path('app_home') }}">Accueil</a>
+                            {% if (app.request.get('_route') == 'app_home') %}
+                                <a class="nav-link active" aria-current="page" href="{{ path('app_home') }}">Accueil</a>
+                            {% else %}
+                                <a class="nav-link" aria-current="page" href="{{ path('app_home') }}">Accueil</a>
+                            {% endif %}
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Nos Hôtels</a>

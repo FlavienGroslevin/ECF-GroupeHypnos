@@ -7,3 +7,19 @@
     font-family: 'Archane';
     src: url('./fonts/Archane.woff2') format('woff2');
 }
+.background-home{
+    background: url("./img/homepage/img_homepage.webp") center;
+    background-size: cover;
+    height: 450px;
+    border-radius: 10px;
+}
+.background-end{
+    background: url("./img/homepage/img-backgroundend.webp") center;
+    background-size: cover;
+    height: 450px;
+    border-radius: 10px;
+}
+.title-background{
+    padding: 10px;
+    backdrop-filter: brightness(40%);
+}
