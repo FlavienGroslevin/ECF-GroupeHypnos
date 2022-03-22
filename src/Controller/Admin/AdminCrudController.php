@@ -16,7 +16,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Orm\EntityRepository;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
-class UserCrudController extends AbstractCrudController
+class AdminCrudController extends AbstractCrudController
 {
     protected EntityRepository $entityRepository;
 
@@ -27,7 +27,7 @@ class UserCrudController extends AbstractCrudController
     public function createIndexQueryBuilder(SearchDto $searchDto, EntityDto $entityDto, FieldCollection $fields, FilterCollection $filters): QueryBuilder
     {
         $response = $this->entityRepository->createQueryBuilder($searchDto, $entityDto, $fields, $filters);
-        $response->andWhere('entity.roles LIKE :role')->setParameter('role', '%ROLE_CLIENT%');
+        $response->andWhere('entity.roles LIKE :role')->setParameter('role', '%ROLE_ADMIN%');
         return $response;
     }
 
@@ -36,8 +36,8 @@ class UserCrudController extends AbstractCrudController
 
         return $crud
             ->setSearchFields(['firstname', 'lastname', 'email'])
-            ->setEntityLabelInSingular('Client')
-            ->setEntityLabelInPlural('Clients');
+            ->setEntityLabelInSingular('Administrateur')
+            ->setEntityLabelInPlural('Administrateurs');
 
     }
     public static function getEntityFqcn(): string
@@ -56,10 +56,11 @@ class UserCrudController extends AbstractCrudController
                 ->setFormType(PasswordType::class),
             ChoiceField::new('roles', 'Rôle')
                 ->setChoices([
-                    'Client' => 'ROLE_CLIENT'
+                    'Admin' => 'ROLE_ADMIN',
                 ])
                 ->allowMultipleChoices()
                 ->renderExpanded()
         ];
     }
 }
+

@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Hotels;
 use App\Entity\Users;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -19,7 +20,7 @@ class DashboardController extends AbstractDashboardController
     #[Route('/admin', name: 'admin')]
     public function index(): Response
     {
-        $url = $this->adminUrlGenerator->setController(UserCrudController::class)->generateUrl();
+        $url = $this->adminUrlGenerator->setController(GerantCrudController::class)->generateUrl();
         return $this->redirect($url);
 
         // Option 2. You can make your dashboard redirect to different pages depending on the user
@@ -43,7 +44,17 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToCrud('Gérants', 'fa fa-user', Users::class)
+        yield MenuItem::subMenu('Utilisateur', 'fa fa-user-circle')
+            ->setPermission('ROLE_ADMIN')
+            ->setSubItems([
+                MenuItem::linkToCrud('Gérants', 'fa fa-users', Users::class)
+                    ->setController(GerantCrudController::class),
+                MenuItem::linkToCrud('Clients', 'fa fa-user', Users::class)
+                    ->setController(UserCrudController::class),
+                MenuItem::linkToCrud('Administrateurs', 'fa fa-user-md', Users::class)
+                    ->setController(AdminCrudController::class),
+            ]);
+        yield MenuItem::linkToCrud('Établissement', 'fa fa-address-book', Hotels::class)
             ->setPermission('ROLE_ADMIN');
     }
 }
