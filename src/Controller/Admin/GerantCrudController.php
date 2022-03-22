@@ -60,6 +60,7 @@ class GerantCrudController extends AbstractCrudController
             ])
                 ->allowMultipleChoices()
                 ->renderExpanded()
+
         ];
     }
 }
