@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nos Hôtels | Groupe Hypnos{% endblock %}
+
+{% block content %}
+    <main>
+        <article class="container">
+            <h1 class="title text-center fs-2">Nos Hôtels</h1>
+            <hr class="w-25 m-auto my-2 text-success mb-4">
+            <div class="row">
+                {% for hotel in  hotels %}
+                    <section class="col-md-4 mb-4">
+                        <img class="img-fluid" src="{{ asset('img/Hotels/hotel'~ hotel.id ~'.webp') }}" alt="{{ hotel.name }}">
+                        <h2 class="title mt-3 fs-3">{{ hotel.name }}</h2>
+                        <span class="text-success">{{ hotel.city }}</span>
+                        <p style="text-align: justify">{{ hotel.description }}</p>
+                        <div class="d-flex justify-content-center">
+                            <button href="#" class="btn btn-info"><i class="fa-solid fa-plus"></i> Voir les suites</button>
+                        </div>
+                    </section>
+                {% endfor %}
+            </div>
+        </div>
+    </main>
+{% endblock %}

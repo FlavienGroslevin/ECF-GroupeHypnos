@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Hotels;
+use App\Entity\Users;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -28,6 +29,7 @@ class HotelsCrudController extends AbstractCrudController
 
         return $crud
             ->setSearchFields(['name', 'city'])
+            ->setPageTitle('detail', fn (Hotels $hotels) => (string) $hotels->getName())
             ->setEntityLabelInSingular('Hôtel')
             ->setEntityLabelInPlural('Hôtels');
 
@@ -39,7 +41,8 @@ class HotelsCrudController extends AbstractCrudController
             TextField::new('name', "Nom de l'établissement"),
             TextField::new('address', 'Adresse'),
             TextField::new('city', 'Ville'),
-            TextareaField::new('description')->onlyOnForms(),
+            TextareaField::new('description')
+                ->onlyOnForms(),
             AssociationField::new('users', 'Gérant')
                 ->setRequired(true)
                 ->setCustomOptions(['maxLi'=>10,'toDisplay'=>"fullname"])
