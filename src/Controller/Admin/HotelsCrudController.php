@@ -42,7 +42,8 @@ class HotelsCrudController extends AbstractCrudController
             TextField::new('address', 'Adresse'),
             TextField::new('city', 'Ville'),
             TextareaField::new('description')
-                ->onlyOnForms(),
+                ->onlyOnForms()
+                ->onlyOnDetail(),
             AssociationField::new('users', 'Gérant')
                 ->setRequired(true)
                 ->setCustomOptions(['maxLi'=>10,'toDisplay'=>"fullname"])
