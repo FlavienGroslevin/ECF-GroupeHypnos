@@ -43,6 +43,8 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 
     private $fullname;
 
+    private  $nameHotel;
+
     public function __construct()
     {
         $this->hotels = new ArrayCollection();
@@ -202,6 +204,14 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     public function getFullName() :string
     {
         return $this->getFirstname()." ".$this->getLastname();
+    }
+    public function getNameHotel() :string
+    {
+        return $this->hotels[0];
+    }
+    public function getRole() :string
+    {
+        return $this->roles[0];
     }
     public function __toString()
     {

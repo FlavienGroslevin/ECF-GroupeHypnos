@@ -30,8 +30,17 @@ class DashboardController extends AbstractDashboardController
 
     public function configureDashboard(): Dashboard
     {
+        /**
+         * @var Users $user
+         */
+        $user = $this->getUser();
+        if ($user->getRole() == 'ROLE_GERANT'){
+            return Dashboard::new()
+                ->setTitle((string) $user->getNameHotel());
+        }
         return Dashboard::new()
             ->setTitle('Groupe Hypnos');
+
     }
 
     public function configureMenuItems(): iterable
@@ -51,8 +60,11 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Établissement', 'fa fa-address-book', Hotels::class)
             ->setPermission('ROLE_ADMIN');
         yield MenuItem::linkToCrud('Chambres', 'fa fa-bed', HotelRooms::class)
-            ->setController(HotelRoomsAdminCrudController::class)
-            ->setPermission('ROLE_ADMIN');
+            ->setPermission('ROLE_ADMIN')
+            ->setController(HotelRoomsAdminsCrudController::class);
+        yield MenuItem::linkToCrud('Chambres', 'fa fa-bed', HotelRooms::class)
+            ->setController(HotelRoomsCrudController::class)
+            ->setPermission('ROLE_GERANT');
         yield MenuItem::linkToCrud('Images', 'fa fa-image', Images::class);
     }
 }
