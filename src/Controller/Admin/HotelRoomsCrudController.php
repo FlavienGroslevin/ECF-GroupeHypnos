@@ -64,14 +64,23 @@ class HotelRoomsCrudController extends AbstractCrudController
     }
 
     public function configureFields(string $pageName): iterable
-    {
+    {    /**
+         * @var Users $user
+         */
+        $user = $this->getUser();
+        $hotels = $user->getNameHotel();
         return [
             TextField::new('title', 'Titre'),
             TextareaField::new('description'),
             NumberField::new('price', 'prix par nuit')
                 ->setNumDecimals(2),
             TextField::new('booking_link', 'URL booking'),
-            AssociationField::new('hotels', 'Hôtel'),
+            AssociationField::new('hotels', 'Hôtel')
+                ->setQueryBuilder(function ($q) use ($hotels) {
+                    return $q
+                            ->andWhere('entity.name = :hotel')
+                            ->setParameter('hotel', $hotels);
+                }),
             AssociationField::new('images'),
         ];
     }
