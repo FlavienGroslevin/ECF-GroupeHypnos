@@ -3,6 +3,8 @@
 namespace App\Controller\Admin;
 
 use App\Entity\HotelRooms;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
@@ -12,13 +14,20 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class HotelRoomsAdminsCrudController extends AbstractCrudController
 {
+    public function configureActions(Actions $actions): Actions
+    {
+        return $actions
+            ->add(Crud::PAGE_INDEX, Action::DETAIL);
+    }
+
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setSearchFields(['title'])
+            ->setSearchFields(['title', 'hotels.name'])
+            ->setPageTitle('detail', fn (HotelRooms $hotels) => (string) $hotels->getTitle())
             ->setEntityLabelInSingular('Chambre')
+            ->setPaginatorPageSize(4)
             ->setEntityLabelInPlural('Chambres');
-
     }
 
     public static function getEntityFqcn(): string

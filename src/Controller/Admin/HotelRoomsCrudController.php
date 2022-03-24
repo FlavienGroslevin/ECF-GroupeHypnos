@@ -4,9 +4,12 @@ namespace App\Controller\Admin;
 
 use App\Entity\HotelRooms;
 use App\Entity\Users;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FilterCollection;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
@@ -20,6 +23,13 @@ use EasyCorp\Bundle\EasyAdminBundle\Orm\EntityRepository;
 class HotelRoomsCrudController extends AbstractCrudController
 {
     protected EntityRepository $entityRepository;
+    protected EntityManagerInterface $entityManager;
+
+    public function configureActions(Actions $actions): Actions
+    {
+        return $actions
+            ->add(Crud::PAGE_INDEX, Action::DETAIL);
+    }
 
     public function __construct(EntityRepository $entityRepository) {
         $this->entityRepository = $entityRepository;
@@ -29,6 +39,8 @@ class HotelRoomsCrudController extends AbstractCrudController
         return $crud
             ->setSearchFields(['title'])
             ->setEntityLabelInSingular('Chambre')
+            ->setPageTitle('detail', fn (HotelRooms $hotels) => (string) $hotels->getTitle())
+            ->setPaginatorPageSize(4)
             ->setEntityLabelInPlural('Chambres');
 
     }
