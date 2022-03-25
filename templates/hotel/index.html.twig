@@ -15,7 +15,7 @@
                         <span class="text-success">{{ hotel.city }}</span>
                         <p style="text-align: justify">{{ hotel.description }}</p>
                         <div class="d-flex justify-content-center">
-                            <button href="#" class="btn btn-info"><i class="fa-solid fa-plus"></i> Voir les suites</button>
+                            <a href="{{ path('app_hotel_rooms', {'id' : hotel.id}) }}" class="btn btn-info"><i class="fa-solid fa-plus"></i> Voir les suites</a>
                         </div>
                     </section>
                 {% endfor %}
