@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réservation | Groupe Hypnos{% endblock %}
+
+{% block content %}
+    <main>
+        <article class="container mt-3">
+            <section class="background-home">
+                <div class="d-flex h-75 flex-column justify-content-end text-center align-items-center">
+                    <h1 class="title-background">Vous êtes sur le point de vivre un séjour inoubliable !</h1>
+                </div>
+            </section>
+            <section class="mt-3">
+                {{ form_start(form, {'attr': {'class' : 'row'} }) }}
+                    <div class="col-6 col-md-2">
+                        {{ form_row(form.start_date) }}
+                    </div>
+                    <div class="col-6 col-md-2">
+                        {{ form_row(form.end_date) }}
+                    </div>
+                    <div class="col-6 col-md-4">
+                        {{ form_row(form.hotels) }}
+                    </div>
+                    <div class="col-6 col-md-4">
+                        {{ form_row(form.hotelRooms) }}
+                    </div>
+                {{ form_end(form) }}
+            </section>
+        </article>
+    </main>
+{% endblock %}
+
+{% block body_javascript %}
+<script type="module" src="{{ asset('assets/datepicker/datepicker.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/datepicker/datepickerload.js') }}"></script>
+{% endblock %}
