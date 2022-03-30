@@ -44,7 +44,7 @@
                     <p style="text-align: justify">{{ room.description }}</p>
                     <div class="d-flex justify-content-around align-items-center my-2">
                         <a href="{{ room.bookinglink }}" target="_blank" class="btn btn-info">En savoir plus</a>
-                        <a href="#" class="btn btn-info">Voir les disponibilités</a>
+                        <a href="{{ path('app_reservation', {suite: room.id, hotel: room.hotels.id}) }}" class="btn btn-info">Voir les disponibilités</a>
                     </div>
                 </div>
                 {% endfor %}

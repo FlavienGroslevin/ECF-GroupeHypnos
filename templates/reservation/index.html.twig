@@ -11,18 +11,21 @@
                 </div>
             </section>
             <section class="mt-3">
-                {{ form_start(form, {'attr': {'class' : 'row'} }) }}
+                {{ form_start(form, {'attr': {'class' : 'row d-flex justify-content-arround', 'id' : 'form_reservation'} }) }}
                     <div class="col-6 col-md-2">
                         {{ form_row(form.start_date) }}
                     </div>
                     <div class="col-6 col-md-2">
                         {{ form_row(form.end_date) }}
                     </div>
-                    <div class="col-6 col-md-4">
+                    <div class="col-6 col-md-3">
                         {{ form_row(form.hotels) }}
                     </div>
-                    <div class="col-6 col-md-4">
+                    <div class="col-6 col-md-3">
                         {{ form_row(form.hotelRooms) }}
+                    </div>
+                    <div class="col-md-2 d-flex justify-content-center align-items-end">
+                        {{ form_row(form.Rechercher) }}
                     </div>
                 {{ form_end(form) }}
             </section>
@@ -31,26 +34,7 @@
 {% endblock %}
 
 {% block body_javascript %}
-<script type="module" src="{{ asset('assets/datepicker/datepicker.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('assets/datepicker/datepickerload.js') }}"></script>
-    <script>
-            const $hotel = $("#reservation_hotels");
-            $hotel.change(function (){
-                let $form = $(this).closest("form");
-                let data = {};
-                data[$hotel.attr('name')] = $hotel.val();
-
-                $.ajax({
-                    url: $form.attr('action'),
-                    type: $form.attr('method'),
-                    data: data,
-                    complete: function (html) {
-                        $('#reservation_hotelRooms').replaceWith(
-                            $(html.responseText).find('#reservation_hotelRooms')
-                        );
-                        console.log(html)
-                    }
-                });
-            });
-    </script>
+    <script type="module" src="{{ asset('assets/datepicker/datepicker.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/datepicker/datepickerload.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/form-reservation-ajax.js') }}"></script>
 {% endblock %}
