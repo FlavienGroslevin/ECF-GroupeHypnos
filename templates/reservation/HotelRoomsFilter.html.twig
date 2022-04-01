@@ -1,0 +1,39 @@
+<div class="mt-4">
+    <h3 class="title text-center">Récapitulatif de votre réservation</h3>
+    <p class="text-center fs-4">Du {{ data.startdate | date('d-m-y') }} au {{ data.enddate | date('d-m-y') }} </p>
+    <hr class="w-100 my-2 text-success">
+    <div class="d-flex mt-3">
+            <div class="row">
+                <div id="room{{ data.hotelRooms.id }}" class="carousel slide carousel-fade col-md-6" data-bs-interval="false" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        {% for image in data.hotelRooms.images %}
+                            <div class="carousel-item {%if loop.index == 1%} active {%endif%}">
+                                <img class="d-block w-100" src="{{ asset('img/HotelRoom/'~ image.bin) }}" alt="{{ image.name }}">
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#room{{ data.hotelRooms.id }}" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#room{{ data.hotelRooms.id }}" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex justify-content-between align-items-center my-2">
+                        <h2>{{ data.hotels }}</h2>
+                        <span class="fs-6 badge bg-success text-dark title">{{ (data.hotelRooms.price | number_format(0))*((data.endDate | date('U') - data.startDate | date('U'))/86400) }}€ pour {{ (data.endDate | date('U') - data.startDate | date('U'))/86400 }} nuit(s)</span>
+                    </div>
+                    <span class="fs-4">{{ data.hotelRooms.title }}</span>
+                    <p style="text-align: justify">{{ data.hotelRooms.description }}</p>
+                    <p class="text-decoration-underline">Heure d'arrivée : À partir de 14h00</p>
+                    <p class="text-decoration-underline">Heure de départ : Avant 10h00</p>
+                    <div class="d-flex justify-content-around align-items-center my-2">
+                        <a href="" class="btn btn-info">Réserver mon séjour</a>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>

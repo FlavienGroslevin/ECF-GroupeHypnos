@@ -33,7 +33,7 @@ class ReservationType extends AbstractType
                 'widget' => 'single_text',
                 'html5' => false,
                 'empty_data' => null,
-                'format' => 'dd/mm/yyyy',
+                'format' => 'dd/MM/yyyy',
                 'attr' => [
                     "class" => 'start',
                     "autocomplete" => 'off'
@@ -44,7 +44,7 @@ class ReservationType extends AbstractType
                 'widget' => 'single_text',
                 'html5' => false,
                 'empty_data' => null,
-                'format' => 'dd/mm/yyyy',
+                'format' => 'dd/MM/yyyy',
                 'attr' => [
                     "class" => 'end',
                     "autocomplete" => 'off'
@@ -73,7 +73,7 @@ class ReservationType extends AbstractType
                 $hotel = $this->requestStack->getSession()->get('hotel');
                 $form->add('hotelRooms', EntityType::class, [
                     'class' => HotelRooms::class,
-                    'label' => 'Choix de la suite ( sélectionner un hôtel )',
+                    'label' => 'Choix de la suite',
                     'query_builder' => function (HotelRoomsRepository $repository) use ($hotelRooms, $hotel){
                         if ($this->requestStack->getSession()->get('hotelRoom')){
                             $render = $repository->createQueryBuilder('h')

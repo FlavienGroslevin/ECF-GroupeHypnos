@@ -29,6 +29,14 @@
                     </div>
                 {{ form_end(form) }}
             </section>
+            <section id="result">
+                {% if data is not null %}
+                    {% include 'reservation/HotelRoomsFilter.html.twig' %}
+                {% endif %}
+                {% if reservationExisting is null %}
+                    <p class="text-center text-warning">La suite recherchée n'est malheureusement pas disponible pour ces dates... Veuillez en choisir une autre</p>
+                {% endif %}
+            </section>
         </article>
     </main>
 {% endblock %}

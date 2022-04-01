@@ -45,32 +45,24 @@ class ReservationRoomsRepository extends ServiceEntityRepository
         }
     }
 
-    // /**
-    //  * @return ReservationRooms[] Returns an array of ReservationRooms objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findExistingReservation($hotels, $hotelRooms, $start, $end)
     {
-        return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('r.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?ReservationRooms
-    {
-        return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
+        $qb = $this->createQueryBuilder('b')
+            ->innerJoin('b.hotels', 'h')
+            ->innerJoin('b.hotelRooms', 'hr')
+            ->where('h = :hotel')
+            ->andWhere('hr = :hotelRooms')
+            ->andWhere('
+                (b.start_date BETWEEN :startDateFrom AND :startDateTo) OR 
+                (b.end_date BETWEEN :endDateFrom AND :endDateTo) OR
+                (b.start_date < :startDateFrom AND b.end_date > :endDateTo)
+                ')
+            ->setParameter('hotel', $hotels)
+            ->setParameter('hotelRooms', $hotelRooms)
+            ->setParameter('startDateFrom', $start)
+            ->setParameter('startDateTo', $end)
+            ->setParameter('endDateFrom', $start)
+            ->setParameter('endDateTo', $end);
+        return $qb->getQuery()->getResult();
+     }
 }
