@@ -22,6 +22,7 @@ class ReservationController extends AbstractController
         $this->requestStack = $requestStack;
         $this->entityManager = $entityManager;
     }
+
     #[Route('/reservation', name: 'app_reservation')]
     public function index(Request $request, ReservationRoomsRepository $repository): Response
     {
@@ -33,34 +34,63 @@ class ReservationController extends AbstractController
         }
 
         $reservationRooms = new ReservationRooms();
-        $form = $this->createForm(ReservationType::class, $reservationRooms);
-        $form->handleRequest($request);
+        $formAjax = $this->createForm(ReservationType::class, $reservationRooms);
+        $formAjax->handleRequest($request);
         $data = null;
         $reservationExisting = "";
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($formAjax->isSubmitted() && $formAjax->isValid()) {
+
                 /** @var  Users $users */
                 $users = $this->getUser();
+
                 $filter = $repository->findExistingReservation(
-                    $form->get('hotels')->getData(),
-                    $form->get('hotelRooms')->getData(),
-                    $form->get('start_date')->getData(),
-                    $form->get('end_date')->getData()
+                    $formAjax->get('hotels')->getData(),
+                    $formAjax->get('hotelRooms')->getData(),
+                    $formAjax->get('start_date')->getData(),
+                    $formAjax->get('end_date')->getData()
                 );
+
+                $reservationRooms->setUsers($users);
+
                 if (empty($filter)){
-                   $data = $form->getData();
-                };
+                   $data = $formAjax->getData();
+                    $this->requestStack->getSession()->set('reservation', $data);
+                }
+
                 if (!empty($filter)){
                     $reservationExisting = null;
                 };
-                $reservationRooms->setUsers($users);
-                $this->entityManager->persist($reservationRooms);
-
         }
+
         return $this->render('reservation/index.html.twig', [
             'controller_name' => 'ReservationController',
-            'form' => $form->createView(),
+            'form' => $formAjax->createView(),
             'data' => $data,
-            'reservationExisting' => $reservationExisting
+            'reservationExisting' => $reservationExisting,
+        ]);
+    }
+    #[Route('/reservation/confirmation', name: 'app_reservation_confirm')]
+    public function confirm(): Response
+    {
+        if ($this->requestStack->getSession()->get('reservation')){
+            $reservation = new ReservationRooms();
+            $data = $this->requestStack->getSession()->get('reservation');
+            $reservation->setStartDate($data->getStartDate());
+            $reservation->setEndDate($data->getEndDate());
+            $reservation->setHotels($data->getHotels());
+            $reservation->setHotelRooms($data->getHotelRooms());
+            $reservation->setUsers($data->getUsers());
+
+            $this->entityManager->merge($reservation);
+            $this->entityManager->flush();
+            $this->requestStack->getSession()->remove('reservation');
+        }
+        else{
+            return $this->redirectToRoute('app_reservation');
+        };
+
+        return $this->render('reservation/reservationConfirm.html.twig', [
+            'data' => $data
         ]);
     }
 }

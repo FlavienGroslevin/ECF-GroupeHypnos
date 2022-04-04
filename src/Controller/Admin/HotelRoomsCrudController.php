@@ -46,9 +46,7 @@ class HotelRoomsCrudController extends AbstractCrudController
     }
     public function createIndexQueryBuilder(SearchDto $searchDto, EntityDto $entityDto, FieldCollection $fields, FilterCollection $filters): QueryBuilder
     {
-        /**
-         * @var Users $user
-         */
+        /** @var Users $user */
         $user = $this->getUser();
         $hotels = $user->getHotels();
         $response = $this->entityRepository->createQueryBuilder($searchDto, $entityDto, $fields, $filters);

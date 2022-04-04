@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+    <main>
+        <article>
+            <section>
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content text-dark">
+                        <div class="modal-body">
+                            <h3 class="text-center title">Votre réservation est confirmée</h3>
+                            <p class="text-center fs-5">Nous serons ravis de vous accueillir à {{ data.hotels }}</p>
+                            <hr>
+                            <div class="d-flex justify-content-around container">
+                                <div class="d-flex flex-column align-items-center">
+                                    <p class="mb-0 fs-4">Du</p>
+                                    <p class="m-0 fs-3">{{ data.startdate | format_datetime(locale='fr', pattern="EEEE dd MMMM YYYY") }}</p>
+                                </div>
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <i class="fa-solid fa-arrow-right-long fa-2xl"></i>
+                                </div>
+                                <div class="d-flex flex-column align-items-center">
+                                    <p class="mb-0 fs-4">Au</p>
+                                    <p class="m-0 fs-3">{{ data.enddate | format_datetime(locale='fr', pattern="EEEE dd MMMM YYYY") }}</p>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row container">
+                                <div class="d-flex flex-column col">
+                                    <p class="fs-4 mb-1 text-decoration-underline">Adresse de l'hôtel :</p>
+                                    <p class="mb-0 fs-5">{{ data.hotels.address }}</p>
+                                    <p class="fs-5">{{ data.hotels.city }}</p>
+                                </div>
+                                <div class="d-flex justify-content-end align-items-center col">
+                                    <a class="btn btn-info" target="_blank" href="https://www.google.fr/maps/place/{{ data.hotels.address }},+{{ data.hotels.city }}">Voir l'itinéraire</a>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row container">
+                                <div class="d-flex flex-column col">
+                                    <p class="fs-4 mb-1 text-decoration-underline">Prix Total:</p>
+                                </div>
+                                <div class="d-flex justify-content-end align-items-center col">
+                                    <p class="mb-0 fs-4">{{ (data.hotelRooms.price | number_format(0))*((data.endDate | date('U') - data.startDate | date('U'))/86400) }}€ TTC</p>
+                                </div>
+                            </div>
+                            <hr>
+                        </div>
+                        <span class="text-center fs-5">Règlement sur place</span>
+                        <span class="text-center fs-5">Annulation possible 3 jours avant la date d'arrivée</span>
+                        <span class="text-center fs-6 text-warning">Un email de confirmation vient de vous être envoyée à l'adresse : {{ data.users.email }}</span>
+                        <div class="modal-footer justify-content-center mt-4">
+                            <a class="btn btn-info" href="{{ path('app_home') }}">Retourner à la page d'accueil</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </article>
+    </main>
+{% endblock %}

@@ -1,4 +1,4 @@
-<div class="mt-4">
+<section class="mt-4">
     <h3 class="title text-center">Récapitulatif de votre réservation</h3>
     <p class="text-center fs-4">Du {{ data.startdate | date('d-m-y') }} au {{ data.enddate | date('d-m-y') }} </p>
     <hr class="w-100 my-2 text-success">
@@ -31,9 +31,9 @@
                     <p class="text-decoration-underline">Heure d'arrivée : À partir de 14h00</p>
                     <p class="text-decoration-underline">Heure de départ : Avant 10h00</p>
                     <div class="d-flex justify-content-around align-items-center my-2">
-                        <a href="" class="btn btn-info">Réserver mon séjour</a>
+                            <a class="btn btn-info" href="{{ path('app_reservation_confirm') }}">Réserver mon séjour</a>
                     </div>
                 </div>
             </div>
     </div>
-</div>
+</section>
