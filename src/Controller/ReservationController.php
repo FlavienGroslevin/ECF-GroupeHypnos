@@ -7,10 +7,14 @@ use App\Entity\Users;
 use App\Form\ReservationType;
 use App\Repository\ReservationRoomsRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Address;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ReservationController extends AbstractController
@@ -69,8 +73,9 @@ class ReservationController extends AbstractController
             'reservationExisting' => $reservationExisting,
         ]);
     }
+
     #[Route('/reservation/confirmation', name: 'app_reservation_confirm')]
-    public function confirm(): Response
+    public function confirm(MailerInterface $mailer): Response
     {
         if ($this->requestStack->getSession()->get('reservation')){
             $reservation = new ReservationRooms();
@@ -84,6 +89,18 @@ class ReservationController extends AbstractController
             $this->entityManager->merge($reservation);
             $this->entityManager->flush();
             $this->requestStack->getSession()->remove('reservation');
+
+            $email = (new TemplatedEmail())
+                ->from(new Address('groupehypnos@gmail.com', $data->getHotels()->getName()))
+                ->to($data->getUsers()->getEmail())
+                ->priority(Email::PRIORITY_HIGH)
+                ->subject('Confirmation de votre réservation')
+                ->htmlTemplate('emails/reservationConfirm.html.twig')
+                ->context([
+                    'data' => $data
+                ]);
+            $mailer->send($email);
+
         }
         else{
             return $this->redirectToRoute('app_reservation');

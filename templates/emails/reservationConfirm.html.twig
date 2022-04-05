@@ -1,0 +1,15 @@
+<h3 class="text-center title">Votre réservation est confirmée</h3>
+<p class="text-center fs-5">Nous serons ravis de vous accueillir à {{ data.hotels }}</p>
+<hr>
+<p>Du {{ data.startdate | format_datetime(locale='fr', pattern="EEEE dd MMMM YYYY") }}</p>
+<p>Au {{ data.enddate | format_datetime(locale='fr', pattern="EEEE dd MMMM YYYY") }}</p>
+<hr>
+<p>Adresse de l'hôtel :</p>
+<p>{{ data.hotels.address }}</p>
+<p>{{ data.hotels.city }}</p>
+<hr>
+<p>Prix Total:</p>
+<p>{{ (data.hotelRooms.price | number_format(0))*((data.endDate | date('U') - data.startDate | date('U'))/86400) }}€ TTC</p>
+<hr>
+<span>Règlement sur place</span>
+<span>Annulation possible 3 jours avant la date d'arrivée</span>
