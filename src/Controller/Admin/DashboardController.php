@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\HotelRooms;
 use App\Entity\Hotels;
 use App\Entity\Images;
+use App\Entity\ReservationRooms;
 use App\Entity\Users;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -47,6 +48,8 @@ class DashboardController extends AbstractDashboardController
     {
 
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
+        yield MenuItem::linkToCrud('Réservation', 'fa fa-ticket', ReservationRooms::class)
+            ->setController(ReservationRoomsCrudController::class);
         yield MenuItem::subMenu('Utilisateur', 'fa fa-user-circle')
             ->setPermission('ROLE_ADMIN')
             ->setSubItems([
