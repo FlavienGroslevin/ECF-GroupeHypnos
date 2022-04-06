@@ -85,6 +85,9 @@ class ReservationController extends AbstractController
             $reservation->setHotelRooms($data->getHotelRooms());
             $reservation->setUsers($data->getUsers());
 
+            $totalPrice = ($data->getStartDate()->diff($data->getEndDate())->format("%r%a"))* $data->getHotelRooms()->getPrice();
+            $reservation->setTotalPrice($totalPrice);
+
             $this->entityManager->merge($reservation);
             $this->entityManager->flush();
             $this->requestStack->getSession()->remove('reservation');

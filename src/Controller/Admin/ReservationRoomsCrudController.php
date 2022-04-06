@@ -14,6 +14,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\SearchDto;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Orm\EntityRepository;
 
@@ -68,7 +69,8 @@ class ReservationRoomsCrudController extends AbstractCrudController
             DateField::new('end_date', 'Départ'),
             TextField::new('hotels', 'Hôtel'),
             TextField::new('hotelRooms', 'Suite'),
-            TextField::new('users', 'Client')
+            TextField::new('users', 'Client'),
+            NumberField::new('totalPrice', 'Prix total de la réservation')
         ];
     }
 }
