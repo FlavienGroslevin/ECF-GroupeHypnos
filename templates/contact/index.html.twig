@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nous contacter | Groupe Hypnos{% endblock %}
+
+{% block content %}
+    <main>
+        <article class="container">
+            <section class="background-home mt-4" style="background: url('{{ asset('img/contact.webp') }}') center no-repeat">
+                <div class="d-flex h-100 flex-column justify-content-center text-center align-items-center">
+                    <div class="d-flex flex-column bg-dark border border-success border-3 p-5">
+                        <h1 class="title">Besoin de nous contacter ?</h1>
+                        <hr class="text-success w-50 m-auto my-2">
+                    </div>
+                </div>
+            </section>
+            <section>
+                <div class="col-lg-8 m-auto mt-4">
+                    <h2 class="title text-center mb-3">Formulaire de contact</h2>
+                    {{ form_start(form, {'attr': {'id' : 'form_contact'} }) }}
+                    {% for message in app.flashes('success') %}
+                        <div class="alert alert-success text-center" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ form_row(form.firstname) }}
+                        </div>
+                        <div class="col-md-6">
+                            {{ form_row(form.lastname) }}
+                        </div>
+                    </div>
+                        {{ form_row(form.email) }}
+                        {{ form_row(form.subject) }}
+                        {{ form_row(form.message) }}
+                        <div class="d-flex justify-content-start align-items-center">
+                            <div class="col-4 col-md-3">
+                                {{ form_widget(form.Envoyer) }}
+                            </div>
+                            <div class="col-4 col-md-2">
+                                {{ form_widget(form.Effacer) }}
+                            </div>
+                        </div>
+                    {{ form_end(form) }}
+                </div>
+            </section>
+        </article>
+    </main>
+{% endblock %}
+{% block body_javascript %}
+    <script type="text/javascript" src="{{ asset('assets/form-contact.js') }}"></script>
+{% endblock %}

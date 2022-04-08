@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vos réservations | Groupe Hypnos{% endblock %}
+
+{% block content %}
+    <main class="container">
+        {% if reservation is not empty %}
+            <h1 class="my-4 rounded-3 text-center p-3 bg-info text-dark">Gérer mes réservations</h1>
+            {% for message in app.flashes('success_delete') %}
+                <div class="alert alert-success text-center" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+                <article class="row align-items-md-stretch">
+                    {% for reservation in reservation %}
+                        <section class="col-md-6 mb-4">
+                            <div class="p-3 text-dark bg-success rounded-3">
+                                <p class="mb-3 fs-4 d-flex justify-content-center">Du {{ reservation.startdate | format_datetime(locale='fr', pattern="EEEE dd MMMM YYYY") }} au {{ reservation.endDate | format_datetime(locale='fr', pattern="EEEE dd MMMM YYYY") }}</p>
+                                <div class="d-flex mb-3">
+                                    <div class="col-6 d-flex flex-column justify-content-center align-items-center">
+                                        <img class="img-fluid rounded-3" src="{{ asset('img/Hotels/hotel'~ reservation.hotels.id ~'.webp') }}" alt="{{ reservation.hotels.name }}">
+                                    </div>
+                                    <div class="col-6 d-flex flex-column justify-content-center align-items-center">
+                                        <h2 class="title fs-4">{{ reservation.hotels.name }}</h2>
+                                        <p class="mb-1 fs-5">{{ reservation.hotelRooms.title }}</p>
+                                        <p class="fs-5">Prix : {{ reservation.totalPrice }}€ le séjour </p>
+                                    </div>
+                                </div>
+                                {% if reservation.startDate | date_modify("-3 days") | date('y/m/d') >= 'now'| date('y/m/d') %}
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        {% include 'reservation/delete_form.html.twig' %}
+                                    </div>
+                                {% elseif reservation.endDate | date('y/m/d') < 'now'| date('y/m/d')  %}
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <a class="btn btn-info disabled align-items-center">Séjour honoré</a>
+                                    </div>
+                                {% else %}
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <a class="btn disabled btn-info align-items-center">L'annulation n'est plus disponible</a>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </section>
+                    {% endfor %}
+                </article>
+            {% endif %}
+        </article>
+    </main>
+{% endblock %}

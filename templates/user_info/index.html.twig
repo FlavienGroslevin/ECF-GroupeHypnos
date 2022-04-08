@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes informations | Groupe Hypnos{% endblock %}
+
+{% block content %}
+    <main>
+        <article class="container d-flex justify-content-center">
+            <section>
+                <h1>Mes informations personnelles</h1>
+                <p>Nom : {{ app.user.lastname }}</p>
+                <p>Prénom : {{ app.user.firstname }}</p>
+                <p>Email : {{ app.user.email }}</p>
+                <div>
+                    <p>Modifier mon mot de passe :</p>
+                </div>
+            </section>
+        </article>
+    </main>
+{% endblock %}

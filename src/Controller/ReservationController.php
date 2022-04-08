@@ -57,7 +57,7 @@ class ReservationController extends AbstractController
 
                 if (empty($filter)){
                    $data = $formAjax->getData();
-                    $this->requestStack->getSession()->set('reservation', $data);
+                   $this->requestStack->getSession()->set('reservation', $data);
                 }
 
                 if (!empty($filter)){
@@ -93,7 +93,7 @@ class ReservationController extends AbstractController
             $this->requestStack->getSession()->remove('reservation');
 
             $email = (new TemplatedEmail())
-                ->from(new Address('groupehypnos@gmail.com', $data->getHotels()->getName()))
+                ->from(new Address('no-reply@hypnos.com', $data->getHotels()->getName()))
                 ->to($data->getUsers()->getEmail())
                 ->priority(Email::PRIORITY_HIGH)
                 ->subject('Confirmation de votre réservation')
