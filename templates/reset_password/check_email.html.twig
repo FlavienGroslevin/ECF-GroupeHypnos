@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réinitialiser mot de passe | Groupe Hypnos{% endblock %}
+
+{% block content %}
+    <main>
+        <article class="container mt-4">
+            <section class="col-6 m-auto">
+                <p class="fs-5">
+                    Si un compte correspondant à votre adresse e-mail existe, un e-mail vient d'être envoyé contenant un lien que vous pouvez utiliser pour réinitialiser votre mot de passe.
+                    Le lien expire dans {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
+                </p>
+                <p class="fs-5">Si vous ne recevez pas d'e-mail, veuillez vérifier votre dossier de courrier indésirable ou <a class="text-success" href="{{ path('app_forgot_password_request') }}">Réessayer</a>.</p>
+            </section>
+        </article>
+    </main>
+{% endblock %}
