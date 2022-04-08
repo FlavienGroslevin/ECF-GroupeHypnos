@@ -7,11 +7,32 @@
         <article class="container d-flex justify-content-center">
             <section>
                 <h1>Mes informations personnelles</h1>
-                <p>Nom : {{ app.user.lastname }}</p>
-                <p>Prénom : {{ app.user.firstname }}</p>
-                <p>Email : {{ app.user.email }}</p>
-                <div>
-                    <p>Modifier mon mot de passe :</p>
+                {% for message in app.flashes('success_modify_password') %}
+                    <div class="alert alert-success text-center" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                {% for message in app.flashes('error_modify_password') %}
+                    <div class="alert alert-danger text-center" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                <p class="fs-4">Nom : {{ app.user.lastname }}</p>
+                <p class="fs-4">Prénom : {{ app.user.firstname }}</p>
+                <p class="fs-4">Email : {{ app.user.email }}</p>
+                <div class="accordion" id="accordionFlushExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="flush-headingOne">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                Modifier mon mot de passe :
+                            </button>
+                        </h2>
+                        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">
+                                {{ form(form) }}
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
         </article>
