@@ -5,7 +5,7 @@
 {% block content %}
     <main>
         <article class="container mt-4">
-            <section class="col-6 m-auto">
+            <section class="col-md-6 m-auto">
                 <p class="fs-5">
                     Si un compte correspondant à votre adresse e-mail existe, un e-mail vient d'être envoyé contenant un lien que vous pouvez utiliser pour réinitialiser votre mot de passe.
                     Le lien expire dans {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
