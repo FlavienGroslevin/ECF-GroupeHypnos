@@ -1,8 +1,8 @@
 {
-  "build/app.css": "/build/app.css",
-  "build/app.js": "/build/app.js",
-  "build/runtime.js": "/build/runtime.js",
-  "build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_symfony_ux-chartjs_di-3fc734.js": "/build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_symfony_ux-chartjs_di-3fc734.js",
+  "build/app.css": "/build/app.b7ce1eed.css",
+  "build/app.js": "/build/app.50ab8ef8.js",
+  "build/runtime.js": "/build/runtime.9a71ee5d.js",
+  "build/484.cd95c96d.js": "/build/484.cd95c96d.js",
   "build/images/img-backgroundend.webp": "/build/images/img-backgroundend.3474363a.webp",
   "build/images/img-homepage.webp": "/build/images/img-homepage.f447db3f.webp",
   "build/fonts/Antique-Regular.otf": "/build/fonts/Antique-Regular.e3ded4cd.otf",
