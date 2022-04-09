@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\ResetType;
@@ -52,6 +53,10 @@ class ContactType extends AbstractType
                     'placeholder' => 'Votre message...'
                 ]
             ])
+            ->add('accept', CheckboxType::class, [
+                'required' => true,
+                'label' => "En cochant cette case et en soumettant ce formulaire, j'accepte que mes données personnelles soient utilisées pour me recontacter dans le cadre de ma demande indiquée dans ce formulaire. Aucun autre traitement ne sera effectué avec mes informations."
+            ])
             ->add('Envoyer', SubmitType::class, [
                 'attr' => [
                     'class' => 'btn-info w-100'
@@ -61,8 +66,7 @@ class ContactType extends AbstractType
                 'attr' => [
                     'class' => 'btn-success mx-4 w-100',
                 ]
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

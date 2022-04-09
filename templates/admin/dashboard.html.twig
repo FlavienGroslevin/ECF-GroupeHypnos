@@ -1,0 +1,16 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+{% block configured_javascripts %}
+    {{ encore_entry_script_tags('app') }}
+{% endblock %}
+
+{% block main %}
+<h1 class="text-center fs-3">Bonjour {{ app.user.firstname }}, bienvenue sur votre espace !<br> <a class="fs-4 text-decoration-underline" href="{{ path('app_home') }}">Revenir sur le site</a></h1>
+    <div class="d-flex align-items-center flex-column mt-4">
+        <div class="p-3 border rounded-3 border-white">
+            <h2 class="text-center">Challenge de {{ 'now'| format_datetime(locale='fr', pattern="MMMM") | upper  }}</h2>
+            <p>Le gérant avec le plus de réservation remportera un voyage d'une valeur de 1800€ pour 2 personnes à la destination de son choix.</p>
+            <p class="text-center fs-4">Vous pouvez suivre en temps réel le résultat de chacun ! C'est parti !</p>
+            {{ render_chart(chart) }}
+        </div>
+    </div>
+{% endblock %}

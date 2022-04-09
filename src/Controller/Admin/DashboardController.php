@@ -7,25 +7,48 @@ use App\Entity\Hotels;
 use App\Entity\Images;
 use App\Entity\ReservationRooms;
 use App\Entity\Users;
+use App\Repository\HotelsRepository;
+use App\Repository\ReservationRoomsRepository;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
-use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
+use Symfony\UX\Chartjs\Model\Chart;
 
 class DashboardController extends AbstractDashboardController
 {
 
-    public function __construct(private AdminUrlGenerator $adminUrlGenerator) {
-
-    }
     #[Route('/admin', name: 'admin')]
-    public function index(): Response
+    public function Dashboard(ChartBuilderInterface $chartBuilder, HotelsRepository $hotelsRepository, ReservationRoomsRepository $reservationRoomsRepository): Response
     {
+        $hotels = $hotelsRepository->findAll();
+        $data = [];
+        $labels = [];
 
-        $url = $this->adminUrlGenerator->setController(GerantCrudController::class)->generateUrl();
-        return $this->redirect($url);
+        foreach ($hotels as $hotel){
+            $labels[] = $hotel->getName();
+            $data[] = count($hotel->getReservationRooms());
+        }
+
+        $chart = $chartBuilder->createChart(Chart::TYPE_BAR);
+
+        $chart->setData([
+            'labels' => $labels,
+            'datasets' => [
+                [
+                    'label' => "Nombre de réservation par hôtel",
+                    'backgroundColor' => '#DE9151',
+                    'borderColor' => '#FEEAA6',
+                    'data' => $data,
+                ],
+            ],
+        ]);
+
+        return $this->render('admin/dashboard.html.twig', [
+            'chart' => $chart,
+        ]);
 
     }
 
@@ -43,11 +66,10 @@ class DashboardController extends AbstractDashboardController
             ->setTitle('Groupe Hypnos');
 
     }
-
     public function configureMenuItems(): iterable
     {
 
-        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
+        yield MenuItem::linkToDashboard("Page d'accueil", 'fa fa-home');
         yield MenuItem::linkToCrud('Réservation', 'fa fa-ticket', ReservationRooms::class)
             ->setController(ReservationRoomsCrudController::class);
         yield MenuItem::subMenu('Utilisateur', 'fa fa-user-circle')
