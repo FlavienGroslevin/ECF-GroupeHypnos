@@ -43,7 +43,15 @@
                         </section>
                     {% endfor %}
                 </article>
-            {% endif %}
-        </article>
+        {% else %}
+            <article class="mt-4">
+                <section class="border border-white rounded-3 p-5">
+                    <i class="fa-solid fa-thumbs-down fa-5x"></i>
+                    <h1>Pas de séjour réservé... pour l'instant !</h1>
+                    <p class="fs-4">Il est temps de ressortir vos valises et de préparer votre prochain séjour</p>
+                    <a href="{{ path('app_reservation') }}" class="btn btn-info">Réserver un séjour</a>
+                </section>
+            </article>
+        {% endif %}
     </main>
 {% endblock %}
