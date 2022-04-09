@@ -37,7 +37,7 @@
                         <div class="border border-success p-4">
                             <h3 class="title text-center text-success text-decoration-underline">Soyez les bienvenus</h3>
                             <p style="text-align: center">L’équipe Hypnos vous accueille dans une ambiance luxueuse et familiale dans l'une de ses 90 chambres et suites.</p>
-                            <button href="#" class="btn btn-info">Réserver une suite</button>
+                            <a href="{{ path('app_reservation') }}" class="btn btn-info">Réserver une suite</a>
                         </div>
                     </div>
                 </div>
@@ -84,7 +84,7 @@
             <section class="background-end mt-4">
                 <div class="d-flex h-75 flex-column justify-content-end text-center align-items-center">
                     <h1 class="title-background">Vivez un séjour unique !</h1>
-                    <button class="btn btn-info">Réserver maintenant</button>
+                    <a href="{{ path('app_reservation') }}" class="btn btn-info">Réserver maintenant</a>
                 </div>
             </section>
         </article>

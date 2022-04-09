@@ -8,7 +8,7 @@
     src: url('./fonts/Archane.woff2') format('woff2');
 }
 .background-home{
-    background: url("./img/homepage/img_homepage.webp") center;
+    background: url("./img/homepage/img-homepage.webp") center;
     background-size: cover;
     height: 450px;
     border-radius: 10px;
