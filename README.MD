@@ -17,21 +17,26 @@ obligatoirement sur place.
 L'environnement technique
 - Pour le front : HTML5, CSS3, Bootstrap, Javascript (Jquery)
 - Pour le back, PHP 8.1 sous PDO, Symfony 5, My SQL
+Yarn : v1.22.17
+Npm : 8.1.2
+
 
 ## 3. Procédure de mise en place
-- Vérifiez si avez le .env dans votre dossier 
 `git clone https://github.com/FlavienGroslevin/ECF-GroupeHypnos.git`
 ___
-`composer install`
+- Vérifiez si vous avez le .env dans votre dossier
+___
+`composer install` 
 ___
 - Modifer le fichier .env pour votre BDD et ensuite :
 `php bin/console doctrine:database:create`
 ___
 `php bin/console doctrine:migrations:migrate`
 ___
-`yarn install`
+`yarn install` ou `npm install`
+- Si vous avez un probleme de package-lock.json supprimez le
 ___
-`yarn dev`
+`yarn dev` ou `npm run dev`
 ___
 `symfony server:start`
 ___
