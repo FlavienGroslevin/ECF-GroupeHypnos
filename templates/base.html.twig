@@ -6,8 +6,10 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <meta name="robots" content="all">
         <meta name="description" content="Le groupe Hypnos est un groupe hôtelier créé en 2000, il est réputé aujourd'hui dans toute la France pour son service premium et son prestige">
-        <title>{% block title %}Hypnos | Groupe Hôteliers 5 étoiles{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        <title>{% block title %}Hypnos | Groupe Hôtelier 5 étoiles{% endblock %}</title>
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('img/favicon/apple-touch-icon.png') }}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('img/favicon/favicon-32x32.png') }}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('img/favicon/favicon-16x16.png') }}">
         <script src="https://kit.fontawesome.com/e98cd34f75.js" crossorigin="anonymous"></script>
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
