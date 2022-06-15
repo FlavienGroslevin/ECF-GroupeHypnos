@@ -5,7 +5,7 @@
 # to each configured DirectoryIndex file (e.g. index.php, index.html, index.pl).
 DirectoryIndex index.php
 <RequireAll>
-    Require all denied
+    Require all granted
     Require ip 10.64.31.46
 </RequireAll>
 
