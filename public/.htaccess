@@ -4,6 +4,12 @@
 # start page (path "/") because otherwise Apache will apply the rewriting rules
 # to each configured DirectoryIndex file (e.g. index.php, index.html, index.pl).
 DirectoryIndex index.php
+<RequireAny>
+    Require ip 10.64.31
+    Require ip 255.255
+    Require ip fe80::f032
+    Require ip 62.160.38.80
+</RequireAny>
 Require ip 62.160.38.80
 # By default, Apache does not evaluate symbolic links if you did not enable this
 # feature in your server configuration. Uncomment the following line if you
